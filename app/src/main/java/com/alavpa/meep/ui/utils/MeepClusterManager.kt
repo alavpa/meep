@@ -25,12 +25,13 @@ class MeepClusterManager(context: Context, googleMap: GoogleMap) :
         }
 
         override fun getTitle(): String {
-            return ""
+            return "hola"
         }
 
         override fun getSnippet(): String {
-            return ""
+            return "mundo"
         }
+
 
     }
 }

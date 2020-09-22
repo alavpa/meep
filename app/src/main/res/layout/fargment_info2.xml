@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/default_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/MeepTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:drawableStartCompat="@drawable/ic_moto"
+        android:drawablePadding="@dimen/ic_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/tv_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="modelo" />
+
+    <TextView
+        android:id="@+id/tv_plate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintStart_toEndOf="@+id/tv_model"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="4455FGT" />
+
+    <TextView
+        android:id="@+id/tv_battery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:drawablePadding="@dimen/ic_padding"
+        app:drawableStartCompat="@drawable/ic_battery"
+        app:layout_constraintTop_toBottomOf="@+id/tv_plate"
+        tools:text="76%" />
+
+    <TextView
+        android:id="@+id/tv_helmet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:drawablePadding="@dimen/ic_padding"
+        app:drawableStartCompat="@drawable/ic_helmet"
+        app:layout_constraintTop_toBottomOf="@+id/tv_battery"
+        tools:text="5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
