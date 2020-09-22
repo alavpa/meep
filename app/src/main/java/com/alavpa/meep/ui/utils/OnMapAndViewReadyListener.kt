@@ -1,4 +1,4 @@
-package com.alavpa.meep.ui.main
+package com.alavpa.meep.ui.utils
 
 import android.view.ViewTreeObserver
 import com.google.android.gms.maps.GoogleMap

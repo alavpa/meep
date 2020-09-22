@@ -11,9 +11,8 @@ class MainPresenter(private val getResources: GetResources) : Presenter() {
         private const val ZONE = "lisboa"
     }
 
-    val renderLiveData = MutableLiveData<ViewModel>()
-    private val viewModel: ViewModel
-        get() = renderLiveData.value ?: ViewModel()
+    val populateLiveData = MutableLiveData<List<MeepResource>?>()
+    val selectResourceLiveData = MutableLiveData<MeepResource?>()
 
     fun getResources(
         lowerLeftLat: Double,
@@ -25,11 +24,11 @@ class MainPresenter(private val getResources: GetResources) : Presenter() {
         getResources.lowerLeft = Pair(lowerLeftLat, lowerLeftLon)
         getResources.upperRight = Pair(upperRightLat, upperRightLon)
         getResources.build().exec {
-            renderLiveData.value = viewModel.copy(resources = it)
+            populateLiveData.value = it
         }
     }
 
-    data class ViewModel(
-        val resources: List<MeepResource> = listOf()
-    )
+    fun selectResource(meepResource: MeepResource?) {
+        selectResourceLiveData.value = meepResource
+    }
 }

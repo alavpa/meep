@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/default_padding">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/MeepTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/ic_padding"
+        app:drawableStartCompat="@drawable/ic_home"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/tv_resources"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:drawablePadding="@dimen/ic_padding"
+        app:drawableStartCompat="@drawable/ic_bike"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="5" />
+
+    <TextView
+        android:id="@+id/tv_spaces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:drawablePadding="@dimen/ic_padding"
+        app:drawableStartCompat="@drawable/ic_slots"
+        app:layout_constraintTop_toBottomOf="@+id/tv_resources"
+        tools:text="5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ data class MeepResponse(
     val y: Double? = null,
     val scheduledArrival: Int? = null,
     val locationType: Int? = null,
-    val companyZoneId: Int? = null,
+    val companyZoneId: Long? = null,
     val licencePlate: String? = null,
     val range: Int? = null,
     val batteryLevel: Int? = null,
