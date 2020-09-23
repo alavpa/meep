@@ -96,7 +96,7 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
         if (res.size < LIMIT_MARKERS) {
             markerManager.addMarkers(googleMap, res)
         } else {
-            markerManager.addClusters(res)
+            clusterManager?.addClusters(res)
         }
     }
 
