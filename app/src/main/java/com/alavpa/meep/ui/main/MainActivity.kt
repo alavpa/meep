@@ -52,7 +52,7 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
         infoDialog =
             supportFragmentManager.findFragmentByTag("showInfo") as? InfoBottomSheetDialogFragment
 
-        if(infoDialog!=null) infoDialog?.dismiss()
+        if (infoDialog != null) infoDialog?.dismiss()
         else infoDialog = InfoBottomSheetDialogFragment.newInstance()
 
         presenter.populateLiveData.observe(this, Observer(::populate))
@@ -94,13 +94,9 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
         val res = resources ?: listOf()
         googleMap?.clear()
         if (res.size < LIMIT_MARKERS) {
-            res.forEach { markerManager.addMarker(googleMap, it) }
+            markerManager.addMarkers(googleMap, res)
         } else {
-            clusterManager?.clearItems()
-            res.forEach {
-                clusterManager?.addItem(MeepClusterManager.MeepClusterItem(LatLng(it.y, it.x)))
-            }
-            clusterManager?.cluster()
+            markerManager.addClusters(res)
         }
     }
 
@@ -113,8 +109,14 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
             infoDialog?.onDismissListener =
                 object : InfoBottomSheetDialogFragment.OnDismissListener {
                     override fun onDismiss() {
-                        presenter.selectResource(null)
-                        renderCurrentFrame()
+                        googleMap?.run {
+                            presenter.onDismissInfo(
+                                lowerLeftLat(),
+                                lowerLeftLon(),
+                                upperRightLat(),
+                                upperRightLon()
+                            )
+                        }
                     }
                 }
             infoDialog?.show(supportFragmentManager, "showInfo")
@@ -122,18 +124,12 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
     }
 
     override fun onCameraIdle() {
-        renderCurrentFrame()
-    }
-
-    private fun renderCurrentFrame() {
         googleMap?.run {
-            val lowerLeft = projection.visibleRegion.latLngBounds.southwest
-            val upperRight = projection.visibleRegion.latLngBounds.northeast
             presenter.getResources(
-                lowerLeft.latitude,
-                lowerLeft.longitude,
-                upperRight.latitude,
-                upperRight.longitude
+                lowerLeftLat(),
+                lowerLeftLon(),
+                upperRightLat(),
+                upperRightLon()
             )
         }
     }
@@ -143,4 +139,20 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
         presenter.selectResourceLiveData.removeObservers(this)
         presenter.populateLiveData.removeObservers(this)
     }
+}
+
+fun GoogleMap.lowerLeftLat(): Double {
+    return projection.visibleRegion.latLngBounds.southwest.latitude
+}
+
+fun GoogleMap.lowerLeftLon(): Double {
+    return projection.visibleRegion.latLngBounds.southwest.longitude
+}
+
+fun GoogleMap.upperRightLat(): Double {
+    return projection.visibleRegion.latLngBounds.northeast.latitude
+}
+
+fun GoogleMap.upperRightLon(): Double {
+    return projection.visibleRegion.latLngBounds.northeast.longitude
 }

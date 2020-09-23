@@ -31,4 +31,14 @@ class MainPresenter(private val getResources: GetResources) : Presenter() {
     fun selectResource(meepResource: MeepResource?) {
         selectResourceLiveData.value = meepResource
     }
+
+    fun onDismissInfo(
+        lowerLeftLat: Double,
+        lowerLeftLon: Double,
+        upperRightLat: Double,
+        upperRightLon: Double
+    ) {
+        selectResourceLiveData.value = null
+        getResources(lowerLeftLat, lowerLeftLon, upperRightLat, upperRightLon)
+    }
 }
