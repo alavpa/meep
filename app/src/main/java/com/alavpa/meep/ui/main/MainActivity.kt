@@ -51,7 +51,9 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
 
         infoDialog =
             supportFragmentManager.findFragmentByTag("showInfo") as? InfoBottomSheetDialogFragment
-                ?: InfoBottomSheetDialogFragment.newInstance()
+
+        if(infoDialog!=null) infoDialog?.dismiss()
+        else infoDialog = InfoBottomSheetDialogFragment.newInstance()
 
         presenter.populateLiveData.observe(this, Observer(::populate))
         presenter.selectResourceLiveData.observe(this, Observer(::showInfo))
@@ -116,7 +118,7 @@ class MainActivity : OnMapAndViewReadyListener.OnGlobalLayoutAndMapReadyListener
                     }
                 }
             infoDialog?.show(supportFragmentManager, "showInfo")
-        } ?: infoDialog?.dismiss()
+        }
     }
 
     override fun onCameraIdle() {
