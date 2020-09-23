@@ -6,10 +6,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
-class MarkerManager(
-    private val renderManager: RenderManager,
-    private val clusterManager: MeepClusterManager
-) {
+class MarkerManager(private val renderManager: RenderManager) {
 
     fun addMarker(googleMap: GoogleMap?, resource: MeepResource) {
         renderManager.getMarkerOptions(resource)?.also { markerOptions ->
@@ -21,13 +18,5 @@ class MarkerManager(
         resources.forEach {
             addMarker(googleMap, it)
         }
-    }
-
-    fun addClusters(resources: List<MeepResource>){
-        clusterManager.clearItems()
-        resources.forEach {
-            clusterManager.addItem(MeepClusterManager.MeepClusterItem(LatLng(it.y, it.x)))
-        }
-        clusterManager.cluster()
     }
 }
